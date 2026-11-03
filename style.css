@@ -1,0 +1,155 @@
+/* Speisekarte Rio de Matura – Maturaball Gymnasium Schlierbach
+   Farben und Schriften wie auf der gedruckten Karte. */
+
+@font-face { font-family: "Montserrat"; font-weight: 500; font-style: normal; font-display: swap; src: url("fonts/montserrat-medium.woff2") format("woff2"); }
+@font-face { font-family: "Montserrat"; font-weight: 600; font-style: normal; font-display: swap; src: url("fonts/montserrat-semibold.woff2") format("woff2"); }
+@font-face { font-family: "Montserrat"; font-weight: 700; font-style: normal; font-display: swap; src: url("fonts/montserrat-bold.woff2") format("woff2"); }
+@font-face { font-family: "Montserrat"; font-weight: 800; font-style: normal; font-display: swap; src: url("fonts/montserrat-extrabold.woff2") format("woff2"); }
+@font-face { font-family: "Montserrat"; font-weight: 500; font-style: italic; font-display: swap; src: url("fonts/montserrat-mediumitalic.woff2") format("woff2"); }
+@font-face { font-family: "League Spartan"; font-weight: 700; font-style: normal; font-display: swap; src: url("fonts/leaguespartan-bold.woff2") format("woff2"); }
+
+:root {
+  /* Farben der Speisekarte */
+  --bg: #FFEA91;          /* Kartengelb */
+  --paper: #FFF2BC;       /* Kartenfläche, etwas heller */
+  --sun: #FFD75E;         /* Kreis hinter der Tänzerin */
+  --ink: #3A2A22;         /* Text */
+  --muted: #745F4C;       /* Beschreibungen */
+  --red: #C54458;         /* Rahmen, Überschriften (wie „RIO“) */
+  --green: #84A032;       /* wie „MATURA“ */
+  --green-text: #5E7D1B;  /* etwas dunkler, damit kleine Schrift lesbar bleibt */
+  --blue: #2F67A3;        /* Mengenangaben */
+  --blue-logo: #3876B6;   /* wie „de“ */
+  --leader: rgba(197, 68, 88, .45);
+  --chip-bg: rgba(255, 242, 188, .92);
+  --chip-line: rgba(197, 68, 88, .35);
+  --shadow: 0 1px 0 rgba(58, 42, 34, .06), 0 10px 30px -18px rgba(120, 60, 30, .45);
+
+  --font-display: "League Spartan", "Montserrat", "Arial Black", system-ui, sans-serif;
+  --font-body: "Montserrat", "Segoe UI", system-ui, -apple-system, sans-serif;
+
+  /* Breiten der Preisspalten */
+  --volw: 3.05em;
+  --pricew: 4.5em;
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body {
+  margin: 0;
+  background: var(--bg); color: var(--ink);
+  font-family: var(--font-body); font-size: 16px; line-height: 1.45;
+}
+img { max-width: 100%; }
+.page { overflow-x: clip; }
+.wrap {
+  max-width: 680px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+
+/* ---------- Kopfbereich (wie das Titelblatt) ---------- */
+.hero { position: relative; padding-block: 28px 8px; }
+.eyebrow { margin: 0 0 6px; color: var(--red); font-weight: 700; font-size: .9rem; letter-spacing: .01em; }
+.logo { margin: 0; font-family: var(--font-display); font-weight: 700; line-height: .82; letter-spacing: -.01em; }
+.logo .row1 { display: flex; align-items: baseline; gap: .12em; }
+.logo .rio { color: var(--red); font-size: clamp(4.2rem, 24vw, 8.2rem); }
+.logo .de { color: var(--blue-logo); font-size: clamp(2rem, 11vw, 3.8rem); }
+.logo .matura { display: block; color: var(--green); font-size: clamp(3.9rem, 19.5vw, 7.4rem); margin-top: .02em; }
+.claim { margin: 10px 0 0; color: var(--blue-logo); font-weight: 700; font-size: clamp(1.05rem, 4.6vw, 1.4rem); }
+
+.cover-row { position: relative; display: grid; grid-template-columns: minmax(0, 42%) minmax(0, 1fr); align-items: center; gap: 8px; margin-top: 14px; }
+.dancer-box { position: relative; aspect-ratio: 560 / 892; max-width: 100%; }
+.dancer-box::before {
+  content: ""; position: absolute; left: 8%; right: -6%; top: 16%; aspect-ratio: 1;
+  border-radius: 50%; background: var(--sun); opacity: .9;
+}
+.dancer { position: relative; display: block; width: 100%; height: auto; }
+.cover-label { position: relative; text-align: left; container-type: inline-size; min-width: 0; }
+.cover-label h2 { margin: 0; color: var(--red); font-weight: 800; font-size: clamp(1.5rem, 6.8vw, 2.6rem); line-height: 1.05; }
+@supports (width: 1cqi) { .cover-label h2 { font-size: min(3rem, 14.5cqi); } }
+.cover-label p { margin: 8px 0 0; color: var(--muted); font-weight: 500; font-size: .95rem; }
+
+/* Federn im Kopfbereich */
+.hf { position: absolute; width: clamp(26px, 8vw, 42px); height: auto; pointer-events: none; }
+.hf1 { right: 2%; top: -6%; transform: rotate(38deg); }
+.hf2 { right: 26%; top: 18%; width: clamp(20px, 6vw, 32px); transform: rotate(-24deg); }
+.hf3 { right: 6%; bottom: 4%; transform: rotate(58deg); }
+.hf4 { left: 46%; bottom: 22%; width: clamp(18px, 5vw, 28px); transform: rotate(-60deg); }
+.tf1 { right: 0; top: 4px; transform: rotate(52deg); }
+.tf2 { right: 17%; top: 46px; width: clamp(18px, 5vw, 26px); transform: rotate(-30deg); }
+@media (prefers-reduced-motion: no-preference) {
+  .hf { animation: sway 6s ease-in-out infinite alternate; transform-origin: 50% 10%; }
+  .hf2, .tf2 { animation-duration: 7.5s; animation-delay: -2s; }
+  .hf3 { animation-duration: 8s; animation-delay: -4s; }
+  @keyframes sway { from { translate: 0 0; rotate: -4deg; } to { translate: 0 6px; rotate: 5deg; } }
+}
+
+/* ---------- Kategorie-Leiste (bleibt beim Scrollen oben) ---------- */
+.nav {
+  position: sticky; top: 0; z-index: 5;
+  background: var(--chip-bg); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--chip-line);
+}
+.nav .wrap { display: flex; gap: 8px; padding-block: 10px; overflow-x: auto; scrollbar-width: none; }
+.chip {
+  flex: 1 0 auto; text-align: center; text-decoration: none;
+  padding: 9px 14px; border-radius: 999px; border: 1.5px solid var(--red);
+  color: var(--red); background: var(--paper); font-weight: 700; font-size: .95rem; line-height: 1.1;
+  transition: background-color .2s, color .2s;
+}
+.chip:hover, .chip:active { background: var(--red); color: var(--paper); }
+.chip:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+
+/* ---------- Karten ---------- */
+main.wrap { display: grid; gap: 38px; padding-block: 26px 40px; }
+.card {
+  position: relative; scroll-margin-top: 74px;
+  background: var(--paper); border: 2px solid var(--red); border-radius: 22px;
+  padding: 26px clamp(14px, 4vw, 30px) 34px; box-shadow: var(--shadow);
+}
+.cf { position: absolute; width: 46px; height: auto; pointer-events: none; }
+.cf-tl { left: -8px; top: -30px; transform: rotate(-58deg); }
+.cf-br { right: 14px; bottom: -50px; width: 44px; transform: rotate(-75deg); }
+
+.sec { margin: 0; text-align: center; color: var(--red); font-weight: 800; font-size: clamp(1.9rem, 7.5vw, 2.4rem); line-height: 1.1; }
+.divider { display: flex; align-items: center; justify-content: center; gap: 5px; margin: 8px 0 6px; }
+.divider i { width: 52px; height: 1.5px; background: var(--red); }
+.divider i:first-child { margin-right: 6px; }
+.divider i:last-child { margin-left: 6px; }
+.divider b { width: 6px; height: 6px; border-radius: 50%; background: var(--red); }
+.divider b:nth-of-type(2) { background: var(--green); }
+.divider b:nth-of-type(3) { background: var(--blue-logo); }
+
+.grp { margin-top: 22px; }
+.group {
+  display: flex; align-items: center; gap: 10px; margin: 0 0 8px;
+  font-family: var(--font-display); font-weight: 700; font-size: 1.02rem; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--green-text); line-height: 1.2;
+}
+.group::after { content: ""; flex: 1; height: 1.5px; background: var(--green); opacity: .55; }
+
+/* ---------- Zeilen: Name ........ Menge Preis ---------- */
+.rows { list-style: none; margin: 0; padding: 0; display: grid; gap: 11px; }
+.item {
+  display: flex; align-items: flex-start; gap: 6px;
+  font-size: 1rem; line-height: 1.35; font-variant-numeric: tabular-nums;
+}
+.name { min-width: 0; display: flex; flex-direction: column; }
+.n { font-weight: 600; text-wrap: pretty; }
+.desc { font-style: italic; font-weight: 500; font-size: .82rem; color: var(--muted); line-height: 1.35; margin-top: 1px; }
+.dots { flex: 1 1 1em; min-width: 1em; height: 1.02em; border-bottom: 2px dotted var(--leader); margin: 0 2px; }
+.prices { flex: none; display: grid; grid-template-columns: var(--volw) var(--pricew); row-gap: 2px; text-align: right; }
+.vol { color: var(--blue); font-weight: 500; font-size: .8em; align-self: baseline; white-space: nowrap; padding-right: .2em; }
+.price { font-weight: 700; white-space: nowrap; align-self: baseline; }
+
+/* breitere Bildschirme: beide Größen nebeneinander */
+@media (min-width: 600px) {
+  .prices[data-n="2"] { grid-template-columns: var(--volw) var(--pricew) var(--volw) var(--pricew); }
+  .item { font-size: 1.1rem; }
+}
+
+footer { text-align: center; color: var(--muted); font-size: .85rem; padding-block: 18px 36px; }
+footer strong { color: var(--red); font-weight: 700; }
